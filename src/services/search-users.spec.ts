@@ -27,13 +27,13 @@ describe("Search users service", () => {
   it.only("should be able to get all users", async () => {
     const user1: Prisma.UserCreateInput = {
       name: "John Doe 1",
-      email: "johndoe1@gmail.com",
+      email: "johndoe1@email.com",
       password: "jf203f029j3f09js",
     };
 
     const user2: Prisma.UserCreateInput = {
       name: "John Doe 2",
-      email: "johndoe2@gmail.com",
+      email: "johndoe2@email.com",
       password: "jf203f029j3f09js",
     };
 

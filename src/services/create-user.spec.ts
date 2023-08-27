@@ -22,7 +22,7 @@ describe("create user service", () => {
 
   it("should create user", async () => {
     const user: Prisma.UserCreateInput = {
-      email: "johndoe2@gmail.com",
+      email: "johndoe@email.com",
       name: "John Doe",
       password: "2j039f092j3f092jf092j029j309fj",
     };

@@ -24,7 +24,7 @@ describe("Search users service", () => {
     createUserService = new CreateUserService(prismaUsersRepository);
   });
 
-  it.only("should be able to get all users", async () => {
+  it("should be able to get all users", async () => {
     const user1: Prisma.UserCreateInput = {
       name: "John Doe 1",
       email: "johndoe1@email.com",

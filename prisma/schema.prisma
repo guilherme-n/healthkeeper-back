@@ -12,7 +12,7 @@ model User {
   email        String         @unique
   name         String
   password     String
-  Professional Professional[]
+  professional Professional[]
 
   @@map("users")
 }
@@ -20,7 +20,7 @@ model User {
 model Specialty {
   id           String         @id @default(uuid())
   description  String
-  Professional Professional[]
+  professional Professional[]
 
   @@map("specialties")
 }
@@ -38,7 +38,7 @@ model Professional {
 
   user        User          @relation(fields: [user_id], references: [id])
   specialty   Specialty     @relation(fields: [specialty_id], references: [id])
-  Appointment Appointment[]
+  appointment Appointment[]
 
   @@map("professionals")
 }
@@ -53,4 +53,6 @@ model Appointment {
 
   professional_id String
   professional    Professional @relation(fields: [professional_id], references: [id])
+
+  @@map("appointments")
 }

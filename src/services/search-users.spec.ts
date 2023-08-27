@@ -28,13 +28,13 @@ describe("Search users service", () => {
     const user1: Prisma.UserCreateInput = {
       name: "John Doe 1",
       email: "johndoe1@email.com",
-      password: "jf203f029j3f09js",
+      password: "password",
     };
 
     const user2: Prisma.UserCreateInput = {
       name: "John Doe 2",
       email: "johndoe2@email.com",
-      password: "jf203f029j3f09js",
+      password: "password",
     };
 
     await createUserService.execute(user1);

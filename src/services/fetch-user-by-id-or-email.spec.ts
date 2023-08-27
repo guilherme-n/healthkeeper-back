@@ -41,7 +41,7 @@ describe("Fetch user by id or email", () => {
   it("should be able to search by email", async () => {
     const user: Prisma.UserCreateInput = {
       name: "John Doe",
-      email: "johndoe@gmail.com",
+      email: "johndoe1@gmail.com",
       password: "password",
     };
 

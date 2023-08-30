@@ -5,5 +5,5 @@ export interface UsersRepository {
 
   findAll(): Promise<User[]>;
 
-  findByIdOrEmail(data: Prisma.UserWhereUniqueInput): Promise<User>;
+  findByIdOrEmail(data: Prisma.UserWhereUniqueInput): Promise<User | null>;
 }

@@ -27,7 +27,7 @@ describe("Fetch user by id or email", () => {
   it("should be able to search by id", async () => {
     const user: Prisma.UserCreateInput = {
       name: "John Doe",
-      email: "johndoe@gmail.com",
+      email: "johndoe@email.com",
       password: "password",
     };
 
@@ -40,7 +40,7 @@ describe("Fetch user by id or email", () => {
   it("should be able to search by email", async () => {
     const user: Prisma.UserCreateInput = {
       name: "John Doe",
-      email: "johndoe1@gmail.com",
+      email: "johndoe1@email.com",
       password: "password",
     };
 
@@ -53,7 +53,7 @@ describe("Fetch user by id or email", () => {
   it("should throw an error if no params are provided", async () => {
     const user: Prisma.UserCreateInput = {
       name: "John Doe",
-      email: "johndoe@gmail.com",
+      email: "johndoe2@email.com",
       password: "password",
     };
 

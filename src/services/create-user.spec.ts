@@ -1,29 +1,23 @@
-import { describe, it, expect, beforeEach, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { CreateUserService } from "./";
-import { PrismaUsersRepository } from "../repositories/prisma";
-import { Prisma } from "@prisma/client";
-import PrismockClient from "prismock";
+import { PrismockClient } from "prismock";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { compare } from "bcryptjs";
+import { makeCreateUserService } from "./factories";
 
 describe("create user service", () => {
   let sut: CreateUserService;
 
-  vi.mock("@prisma/client", async () => {
-    const prismock: typeof PrismockClient = await vi.importActual("prismock");
-
-    return {
-      ...vi.importActual("@prisma/client"),
-      PrismaClient: prismock.PrismockClient,
-    };
-  });
+  vi.mock("@prisma/client", () => ({
+    PrismaClient: PrismockClient,
+  }));
 
   beforeEach(() => {
-    sut = new CreateUserService(new PrismaUsersRepository());
+    sut = makeCreateUserService();
   });
 
   it("should create user", async () => {
-    const user: Prisma.UserCreateInput = {
+    const user = {
       email: "johndoe@email.com",
       name: "John Doe",
       password: "password",
@@ -35,13 +29,13 @@ describe("create user service", () => {
   });
 
   it("should throw an error if email is already registered", async () => {
-    const user1: Prisma.UserCreateInput = {
+    const user1 = {
       email: "johndoe1@email.com",
       name: "John Doe",
       password: "password",
     };
 
-    const user2: Prisma.UserCreateInput = {
+    const user2 = {
       email: "johndoe1@email.com",
       name: "John Doe 2",
       password: "password",
@@ -64,4 +58,14 @@ describe("create user service", () => {
 
     expect(isPasswordHashed).toBeTruthy();
   });
+
+  // it.only("new test", async () => {
+  //   const user = {
+  //     email: "johndoe@email.com",
+  //     name: "John Doe",
+  //     password: "password",
+  //   };
+  //   const createdUser = await sut.execute(user);
+  //   expect(createdUser.id).toEqual(expect.any(String));
+  // });
 });

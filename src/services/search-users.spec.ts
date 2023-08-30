@@ -1,21 +1,15 @@
-import { Prisma } from "@prisma/client";
+import { PrismockClient } from "prismock";
 import { describe, it, beforeEach, vi, expect } from "vitest";
 import { CreateUserService, SearchUsersService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
-import PrismockClient from "prismock";
 
 describe("Search users service", () => {
   let sut: SearchUsersService;
   let createUserService: CreateUserService;
 
-  vi.mock("@prisma/client", async () => {
-    const prismock: typeof PrismockClient = await vi.importActual("prismock");
-
-    return {
-      ...vi.importActual("@prisma/client"),
-      PrismaClient: prismock.PrismockClient,
-    };
-  });
+  vi.mock("@prisma/client", () => ({
+    PrismaClient: PrismockClient,
+  }));
 
   beforeEach(() => {
     const prismaUsersRepository = new PrismaUsersRepository();
@@ -24,13 +18,13 @@ describe("Search users service", () => {
   });
 
   it("should be able to get all users", async () => {
-    const user1: Prisma.UserCreateInput = {
+    const user1 = {
       name: "John Doe 1",
       email: "johndoe1@email.com",
       password: "password",
     };
 
-    const user2: Prisma.UserCreateInput = {
+    const user2 = {
       name: "John Doe 2",
       email: "johndoe2@email.com",
       password: "password",

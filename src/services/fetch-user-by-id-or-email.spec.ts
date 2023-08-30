@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CreateUserService, FetchUserByIdOrEmailService } from "./";
-import PrismockClient from "prismock";
-import { Prisma } from "@prisma/client";
+import { PrismockClient } from "prismock";
 import { PrismaUsersRepository } from "../repositories/prisma";
 import { SearchParamsNotProvidedError } from "./errors";
 
@@ -9,14 +8,9 @@ describe("Fetch user by id or email", () => {
   let sut: FetchUserByIdOrEmailService;
   let createUserService: CreateUserService;
 
-  vi.mock("@prisma/client", async () => {
-    const prismock: typeof PrismockClient = await vi.importActual("prismock");
-
-    return {
-      ...vi.importActual("@prisma/client"),
-      PrismaClient: prismock.PrismockClient,
-    };
-  });
+  vi.mock("@prisma/client", () => ({
+    PrismaClient: PrismockClient,
+  }));
 
   beforeEach(() => {
     const prismaUsersRepository = new PrismaUsersRepository();
@@ -25,7 +19,7 @@ describe("Fetch user by id or email", () => {
   });
 
   it("should be able to search by id", async () => {
-    const user: Prisma.UserCreateInput = {
+    const user = {
       name: "John Doe",
       email: "johndoe@email.com",
       password: "password",
@@ -38,7 +32,7 @@ describe("Fetch user by id or email", () => {
   });
 
   it("should be able to search by email", async () => {
-    const user: Prisma.UserCreateInput = {
+    const user = {
       name: "John Doe",
       email: "johndoe1@email.com",
       password: "password",
@@ -51,7 +45,7 @@ describe("Fetch user by id or email", () => {
   });
 
   it("should throw an error if no params are provided", async () => {
-    const user: Prisma.UserCreateInput = {
+    const user = {
       name: "John Doe",
       email: "johndoe2@email.com",
       password: "password",

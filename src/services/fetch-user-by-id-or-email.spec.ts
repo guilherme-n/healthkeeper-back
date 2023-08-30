@@ -1,23 +1,18 @@
 import { PrismockClient } from "prismock";
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CreateUserService, FetchUserByIdOrEmailService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
 import { SearchParamsNotProvidedError } from "./errors";
 import { clearMockDatabase } from "@/repositories/utils";
 
+vi.mock("@prisma/client", () => ({
+  PrismaClient: PrismockClient,
+}));
+
 describe("Fetch user by id or email", () => {
-  let sut: FetchUserByIdOrEmailService;
-  let createUserService: CreateUserService;
-
-  vi.mock("@prisma/client", () => ({
-    PrismaClient: PrismockClient,
-  }));
-
-  beforeAll(() => {
-    const prismaUsersRepository = new PrismaUsersRepository();
-    sut = new FetchUserByIdOrEmailService(prismaUsersRepository);
-    createUserService = new CreateUserService(prismaUsersRepository);
-  });
+  const prismaUsersRepository = new PrismaUsersRepository();
+  const sut = new FetchUserByIdOrEmailService(prismaUsersRepository);
+  const createUserService = new CreateUserService(prismaUsersRepository);
 
   beforeEach(() => {
     clearMockDatabase();

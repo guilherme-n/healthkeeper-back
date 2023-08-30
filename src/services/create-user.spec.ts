@@ -1,21 +1,16 @@
 import { PrismockClient } from "prismock";
-import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
-import { CreateUserService } from "./";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { compare } from "bcryptjs";
 import { makeCreateUserService } from "./factories";
 import { clearMockDatabase } from "@/repositories/utils";
 
+vi.mock("@prisma/client", () => ({
+  PrismaClient: PrismockClient,
+}));
+
 describe("create user service", () => {
-  let sut: CreateUserService;
-
-  vi.mock("@prisma/client", () => ({
-    PrismaClient: PrismockClient,
-  }));
-
-  beforeAll(() => {
-    sut = makeCreateUserService();
-  });
+  const sut = makeCreateUserService();
 
   beforeEach(() => {
     clearMockDatabase();

@@ -1,22 +1,17 @@
 import { PrismockClient } from "prismock";
-import { describe, it, beforeEach, vi, expect, beforeAll } from "vitest";
+import { describe, it, beforeEach, vi, expect } from "vitest";
 import { CreateUserService, SearchUsersService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
 import { clearMockDatabase } from "@/repositories/utils";
 
+vi.mock("@prisma/client", () => ({
+  PrismaClient: PrismockClient,
+}));
+
 describe("Search users service", () => {
-  let sut: SearchUsersService;
-  let createUserService: CreateUserService;
-
-  vi.mock("@prisma/client", () => ({
-    PrismaClient: PrismockClient,
-  }));
-
-  beforeAll(() => {
-    const prismaUsersRepository = new PrismaUsersRepository();
-    sut = new SearchUsersService(prismaUsersRepository);
-    createUserService = new CreateUserService(prismaUsersRepository);
-  });
+  const prismaUsersRepository = new PrismaUsersRepository();
+  const sut = new SearchUsersService(prismaUsersRepository);
+  const createUserService = new CreateUserService(prismaUsersRepository);
 
   beforeEach(() => {
     clearMockDatabase();

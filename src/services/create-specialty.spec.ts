@@ -1,19 +1,15 @@
 import { PrismockClient } from "prismock";
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CreateSpecialtyService } from "./";
 import { PrismaSpecialtiesRepository } from "../repositories/prisma";
 import { clearMockDatabase } from "../repositories/utils";
 
+vi.mock("@prisma/client", () => ({
+  PrismaClient: PrismockClient,
+}));
+
 describe("Create specialty", () => {
-  let sut: CreateSpecialtyService;
-
-  vi.mock("@prisma/client", () => ({
-    PrismaClient: PrismockClient,
-  }));
-
-  beforeAll(() => {
-    sut = new CreateSpecialtyService(new PrismaSpecialtiesRepository());
-  });
+  const sut = new CreateSpecialtyService(new PrismaSpecialtiesRepository());
 
   beforeEach(() => {
     clearMockDatabase();

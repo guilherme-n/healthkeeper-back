@@ -1,9 +1,10 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { CreateUserService } from "./";
 import { PrismockClient } from "prismock";
+import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
+import { CreateUserService } from "./";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { compare } from "bcryptjs";
 import { makeCreateUserService } from "./factories";
+import { clearMockDatabase } from "@/repositories/utils";
 
 describe("create user service", () => {
   let sut: CreateUserService;
@@ -12,8 +13,12 @@ describe("create user service", () => {
     PrismaClient: PrismockClient,
   }));
 
-  beforeEach(() => {
+  beforeAll(() => {
     sut = makeCreateUserService();
+  });
+
+  beforeEach(() => {
+    clearMockDatabase();
   });
 
   it("should create user", async () => {
@@ -58,14 +63,4 @@ describe("create user service", () => {
 
     expect(isPasswordHashed).toBeTruthy();
   });
-
-  // it.only("new test", async () => {
-  //   const user = {
-  //     email: "johndoe@email.com",
-  //     name: "John Doe",
-  //     password: "password",
-  //   };
-  //   const createdUser = await sut.execute(user);
-  //   expect(createdUser.id).toEqual(expect.any(String));
-  // });
 });

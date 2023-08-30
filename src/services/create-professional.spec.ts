@@ -1,7 +1,8 @@
-import { beforeEach, describe, it, vi } from "vitest";
-import { CreateProfessionalService } from "./";
 import { PrismockClient } from "prismock";
+import { beforeAll, beforeEach, describe, it, vi } from "vitest";
+import { CreateProfessionalService } from "./";
 import { PrismaProfessionalsRepository } from "../repositories/prisma";
+import { clearMockDatabase } from "../repositories/utils";
 
 describe("Create professional service", () => {
   let sut: CreateProfessionalService;
@@ -10,8 +11,12 @@ describe("Create professional service", () => {
     PrismaClient: PrismockClient,
   }));
 
-  beforeEach(() => {
+  beforeAll(() => {
     sut = new CreateProfessionalService(new PrismaProfessionalsRepository());
+  });
+
+  beforeEach(() => {
+    clearMockDatabase();
   });
 
   it("should be able to create a professional", async () => {

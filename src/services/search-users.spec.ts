@@ -1,7 +1,8 @@
 import { PrismockClient } from "prismock";
-import { describe, it, beforeEach, vi, expect } from "vitest";
+import { describe, it, beforeEach, vi, expect, beforeAll } from "vitest";
 import { CreateUserService, SearchUsersService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
+import { clearMockDatabase } from "@/repositories/utils";
 
 describe("Search users service", () => {
   let sut: SearchUsersService;
@@ -11,10 +12,14 @@ describe("Search users service", () => {
     PrismaClient: PrismockClient,
   }));
 
-  beforeEach(() => {
+  beforeAll(() => {
     const prismaUsersRepository = new PrismaUsersRepository();
     sut = new SearchUsersService(prismaUsersRepository);
     createUserService = new CreateUserService(prismaUsersRepository);
+  });
+
+  beforeEach(() => {
+    clearMockDatabase();
   });
 
   it("should be able to get all users", async () => {

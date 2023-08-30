@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/repositories/users-repository";
+import { UsersRepository } from "../repositories";
 import { Prisma, User } from "@prisma/client";
 
 export class CreateUserService {

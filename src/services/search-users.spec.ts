@@ -1,9 +1,8 @@
 import { Prisma } from "@prisma/client";
 import { describe, it, beforeEach, vi, expect } from "vitest";
-import { SearchUsersService } from "./search-users";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+import { CreateUserService, SearchUsersService } from "./";
+import { PrismaUsersRepository } from "../repositories/prisma";
 import PrismockClient from "prismock";
-import { CreateUserService } from "./create-user";
 
 describe("Search users service", () => {
   let sut: SearchUsersService;

@@ -1,4 +1,4 @@
-import { ProfessionalsRepository } from "@/repositories/professionals-repository";
+import { ProfessionalsRepository } from "../repositories";
 import { Prisma, Professional } from "@prisma/client";
 
 export class CreateProfessionalService {

@@ -1,7 +1,7 @@
 import PrismockClient from "prismock";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CreateSpecialtyService } from "./create-specialty";
-import { PrismaSpecialtiesRepository } from "@/repositories/prisma/prisma-specialties-repository";
+import { CreateSpecialtyService } from "./";
+import { PrismaSpecialtiesRepository } from "../repositories/prisma";
 import { Prisma } from "@prisma/client";
 
 describe("Create specialty", () => {

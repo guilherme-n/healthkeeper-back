@@ -1,10 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { FetchUserByIdOrEmailService } from "./fetch-user-by-id-or-email";
-import { CreateUserService } from "./create-user";
+import { CreateUserService, FetchUserByIdOrEmailService } from "./";
 import PrismockClient from "prismock";
 import { Prisma } from "@prisma/client";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
-import { SearchParamsNotProvidedError } from "./errors/search-params-not-provided-error";
+import { PrismaUsersRepository } from "../repositories/prisma";
+import { SearchParamsNotProvidedError } from "./errors";
 
 describe("Fetch user by id or email", () => {
   let sut: FetchUserByIdOrEmailService;

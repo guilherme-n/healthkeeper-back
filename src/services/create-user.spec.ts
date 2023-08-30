@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, beforeAll, vi } from "vitest";
-import { CreateUserService } from "./create-user";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+import { CreateUserService } from "./";
+import { PrismaUsersRepository } from "../repositories/prisma";
 import { Prisma } from "@prisma/client";
 import PrismockClient from "prismock";
 

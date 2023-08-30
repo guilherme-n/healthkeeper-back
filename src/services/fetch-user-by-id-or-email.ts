@@ -1,6 +1,6 @@
-import { UsersRepository } from "@/repositories/users-repository";
+import { UsersRepository } from "../repositories";
 import { Prisma } from "@prisma/client";
-import { SearchParamsNotProvidedError } from "./errors/search-params-not-provided-error";
+import { SearchParamsNotProvidedError } from "./errors";
 
 export class FetchUserByIdOrEmailService {
   constructor(private usersRepository: UsersRepository) {}

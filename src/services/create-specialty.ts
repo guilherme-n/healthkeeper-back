@@ -1,4 +1,4 @@
-import { SpecialtiesRepository } from "@/repositories/specialties-repository";
+import { SpecialtiesRepository } from "../repositories";
 import { Prisma, Specialty } from "@prisma/client";
 
 export class CreateSpecialtyService {

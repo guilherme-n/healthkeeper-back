@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, vi } from "vitest";
-import { CreateProfessionalService } from "./create-professional";
+import { CreateProfessionalService } from "./";
 import PrismockClient from "prismock";
-import { PrismaProfessionalsRepository } from "@/repositories/prisma/prisma-professionals-repository";
+import { PrismaProfessionalsRepository } from "../repositories/prisma";
 import { Prisma } from "@prisma/client";
 
 describe("Create professional service", () => {

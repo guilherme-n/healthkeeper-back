@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/repositories/users-repository";
+import { UsersRepository } from "../repositories";
 import { User } from "@prisma/client";
 
 interface SearchUsersServiceResponse {

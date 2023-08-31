@@ -3,5 +3,5 @@ import { register, specialtiesRoutes } from "./controllers";
 
 export async function appRoutes(app: FastifyInstance) {
   app.register(specialtiesRoutes, { prefix: "specialties" });
-  app.post("/users", register);
+  app.post("/register", register);
 }

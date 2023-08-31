@@ -12,6 +12,7 @@ CREATE TABLE "users" (
 CREATE TABLE "specialties" (
     "id" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
 
     CONSTRAINT "specialties_pkey" PRIMARY KEY ("id")
 );
@@ -31,7 +32,7 @@ CREATE TABLE "professionals" (
 );
 
 -- CreateTable
-CREATE TABLE "Appointment" (
+CREATE TABLE "appointments" (
     "id" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "description" TEXT,
@@ -40,11 +41,17 @@ CREATE TABLE "Appointment" (
     "outcome" TEXT,
     "professional_id" TEXT NOT NULL,
 
-    CONSTRAINT "Appointment_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "appointments_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "specialties_description_user_id_key" ON "specialties"("description", "user_id");
+
+-- AddForeignKey
+ALTER TABLE "specialties" ADD CONSTRAINT "specialties_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "professionals" ADD CONSTRAINT "professionals_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -53,4 +60,4 @@ ALTER TABLE "professionals" ADD CONSTRAINT "professionals_user_id_fkey" FOREIGN 
 ALTER TABLE "professionals" ADD CONSTRAINT "professionals_specialty_id_fkey" FOREIGN KEY ("specialty_id") REFERENCES "specialties"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Appointment" ADD CONSTRAINT "Appointment_professional_id_fkey" FOREIGN KEY ("professional_id") REFERENCES "professionals"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "appointments" ADD CONSTRAINT "appointments_professional_id_fkey" FOREIGN KEY ("professional_id") REFERENCES "professionals"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

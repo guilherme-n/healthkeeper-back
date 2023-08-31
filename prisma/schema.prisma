@@ -13,15 +13,21 @@ model User {
   name         String
   password     String
   professional Professional[]
+  Specialty    Specialty[]
 
   @@map("users")
 }
 
 model Specialty {
-  id           String         @id @default(uuid())
-  description  String
+  id          String @id @default(uuid())
+  description String
+
+  user_id String
+
+  user         User           @relation(fields: [user_id], references: [id])
   professional Professional[]
 
+  @@unique([description, user_id])
   @@map("specialties")
 }
 

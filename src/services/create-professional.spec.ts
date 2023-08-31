@@ -1,7 +1,6 @@
 import { PrismockClient } from "prismock";
-import { beforeEach, describe, it, vi } from "vitest";
-import { CreateProfessionalService } from "./";
-import { PrismaProfessionalsRepository } from "../repositories/prisma";
+import { beforeEach, describe, it, vi, expect } from "vitest";
+import { makeCreateProfessionalService } from "./factories";
 import { clearMockDatabase } from "../repositories/utils";
 
 vi.mock("@prisma/client", () => ({
@@ -9,33 +8,21 @@ vi.mock("@prisma/client", () => ({
 }));
 
 describe("Create professional service", () => {
-  const sut = new CreateProfessionalService(
-    new PrismaProfessionalsRepository(),
-  );
+  const sut = makeCreateProfessionalService();
 
   beforeEach(() => {
     clearMockDatabase();
   });
 
   it("should be able to create a professional", async () => {
-    const specialty = {
-      description: "Cardiologist",
+    const professional = {
+      name: "John doctor 2",
+      specialty_id: "1e483734-8615-4813-9240-78330ee6d12a",
+      user_id: "86d2b271-0f12-46d7-aaba-296d26ccd8ae",
     };
 
-    const professional = {
-      name: "John doctor",
-      specialty: {
-        create: {
-          description: "Cardiologist",
-        },
-      },
-      user: {
-        create: {
-          name: "John Doe",
-          email: "johndoe@email.com",
-          password: "password",
-        },
-      },
-    };
+    const createdProfessional = await sut.execute(professional);
+
+    expect(createdProfessional.id).toEqual(expect.any(String));
   });
 });

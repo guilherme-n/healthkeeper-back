@@ -9,6 +9,7 @@ export const app = fastify();
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 });
+
 app.register(appRoutes);
 
 app.setErrorHandler((err, _, res) => {

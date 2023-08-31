@@ -1,4 +1,5 @@
 import { register } from "./register";
+import { authenticate } from "./authenticate";
 import { specialtiesRoutes } from "./specialties";
 
-export { register, specialtiesRoutes };
+export { register, authenticate, specialtiesRoutes };

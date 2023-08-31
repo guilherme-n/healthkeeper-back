@@ -1,7 +1,9 @@
 import { FastifyInstance } from "fastify";
-import { register, specialtiesRoutes } from "./controllers";
+import { authenticate, register, specialtiesRoutes } from "./controllers";
 
 export async function appRoutes(app: FastifyInstance) {
-  app.register(specialtiesRoutes, { prefix: "specialties" });
   app.post("/register", register);
+  app.post("/authenticate", authenticate);
+
+  app.register(specialtiesRoutes, { prefix: "specialties" });
 }

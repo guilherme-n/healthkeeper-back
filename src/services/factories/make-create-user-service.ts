@@ -1,6 +1,6 @@
 import { PrismaUsersRepository } from "@/repositories/prisma";
-import { CreateUserService } from "../create-user";
+import { RegisterService } from "../register";
 
-export function makeCreateUserService() {
-  return new CreateUserService(new PrismaUsersRepository());
+export function makeRegisterService() {
+  return new RegisterService(new PrismaUsersRepository());
 }

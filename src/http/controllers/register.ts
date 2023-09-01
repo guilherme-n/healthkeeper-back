@@ -1,5 +1,5 @@
 import { EmailAlreadyRegisteredError } from "@/services/errors";
-import { makeCreateUserService } from "@/services/factories";
+import { makeRegisterService } from "@/services/factories";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
@@ -12,10 +12,10 @@ export async function register(req: FastifyRequest, res: FastifyReply) {
 
   const { name, email, password } = requestBodySchema.parse(req.body);
 
-  const createUserService = makeCreateUserService();
+  const registerService = makeRegisterService();
 
   try {
-    await createUserService.execute({
+    await registerService.execute({
       name,
       email,
       password,

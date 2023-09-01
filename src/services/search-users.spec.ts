@@ -1,5 +1,5 @@
 import { describe, it, beforeEach, vi, expect } from "vitest";
-import { CreateUserService, SearchUsersService } from "./";
+import { RegisterService, SearchUsersService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
 import { clearMockDatabase } from "@/repositories/utils";
 
@@ -8,7 +8,7 @@ vi.mock("@prisma/client");
 describe("Search users service", () => {
   const prismaUsersRepository = new PrismaUsersRepository();
   const sut = new SearchUsersService(prismaUsersRepository);
-  const createUserService = new CreateUserService(prismaUsersRepository);
+  const registerService = new RegisterService(prismaUsersRepository);
 
   beforeEach(() => {
     clearMockDatabase();
@@ -27,8 +27,8 @@ describe("Search users service", () => {
       password: "password",
     };
 
-    await createUserService.execute(user1);
-    await createUserService.execute(user2);
+    await registerService.execute(user1);
+    await registerService.execute(user2);
 
     const { users } = await sut.execute();
 

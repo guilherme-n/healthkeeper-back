@@ -1,13 +1,13 @@
 import { CreateProfessionalService } from "./create-professional";
 import { CreateSpecialtyService } from "./create-specialty";
-import { CreateUserService } from "./create-user";
+import { RegisterService } from "./register";
 import { FetchUserByIdOrEmailService } from "./fetch-user-by-id-or-email";
 import { SearchUsersService } from "./search-users";
 
 export {
   CreateProfessionalService,
   CreateSpecialtyService,
-  CreateUserService,
+  RegisterService,
   FetchUserByIdOrEmailService,
   SearchUsersService,
 };

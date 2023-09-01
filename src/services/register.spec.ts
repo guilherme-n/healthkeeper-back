@@ -6,14 +6,14 @@ import { clearMockDatabase } from "@/repositories/utils";
 
 vi.mock("@prisma/client");
 
-describe("create user service", () => {
+describe("register service", () => {
   const sut = makeCreateUserService();
 
   beforeEach(() => {
     clearMockDatabase();
   });
 
-  it("should create user", async () => {
+  it("should be able to register", async () => {
     const user = {
       email: "johndoe@email.com",
       name: "John Doe",

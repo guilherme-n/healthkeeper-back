@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CreateUserService, FetchUserByIdOrEmailService } from "./";
+import { RegisterService, FetchUserByIdOrEmailService } from "./";
 import { PrismaUsersRepository } from "../repositories/prisma";
 import { SearchParamsNotProvidedError } from "./errors";
 import { clearMockDatabase } from "@/repositories/utils";
@@ -9,7 +9,7 @@ vi.mock("@prisma/client");
 describe("Fetch user by id or email", () => {
   const prismaUsersRepository = new PrismaUsersRepository();
   const sut = new FetchUserByIdOrEmailService(prismaUsersRepository);
-  const createUserService = new CreateUserService(prismaUsersRepository);
+  const registerService = new RegisterService(prismaUsersRepository);
 
   beforeEach(() => {
     clearMockDatabase();
@@ -22,7 +22,7 @@ describe("Fetch user by id or email", () => {
       password: "password",
     };
 
-    const createdUser = await createUserService.execute(user);
+    const createdUser = await registerService.execute(user);
     const fetchedUser = await sut.execute({ id: createdUser.id });
 
     expect(fetchedUser).toMatchObject(createdUser);
@@ -35,7 +35,7 @@ describe("Fetch user by id or email", () => {
       password: "password",
     };
 
-    const createdUser = await createUserService.execute(user);
+    const createdUser = await registerService.execute(user);
     const fetchedUser = await sut.execute({ email: createdUser.email });
 
     expect(fetchedUser).toMatchObject(createdUser);
@@ -48,7 +48,7 @@ describe("Fetch user by id or email", () => {
       password: "password",
     };
 
-    await createUserService.execute(user);
+    await registerService.execute(user);
 
     await expect(sut.execute({ id: undefined })).rejects.toThrowError(
       SearchParamsNotProvidedError,

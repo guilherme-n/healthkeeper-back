@@ -3,7 +3,7 @@ import { Prisma, User } from "@prisma/client";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { hash } from "bcryptjs";
 
-export class CreateUserService {
+export class RegisterService {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({

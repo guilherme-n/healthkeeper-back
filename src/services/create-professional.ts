@@ -1,12 +1,10 @@
+import { Professional, ProfessionalCreateInput } from "@/types/professional";
 import { ProfessionalsRepository } from "../repositories";
-import { Prisma, Professional } from "@prisma/client";
 
 export class CreateProfessionalService {
   constructor(private professionalsRepository: ProfessionalsRepository) {}
 
-  async execute(
-    data: Prisma.ProfessionalUncheckedCreateInput,
-  ): Promise<Professional> {
+  async execute(data: ProfessionalCreateInput): Promise<Professional> {
     return await this.professionalsRepository.create(data);
   }
 }

@@ -1,16 +1,12 @@
+import { User, UserCreateInput } from "@/types/user";
 import { UsersRepository } from "../repositories";
-import { Prisma, User } from "@prisma/client";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { hash } from "bcryptjs";
 
 export class RegisterService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({
-    name,
-    email,
-    password,
-  }: Prisma.UserCreateInput): Promise<User> {
+  async execute({ name, email, password }: UserCreateInput): Promise<User> {
     const isEmailAlreadyRegistered =
       await this.usersRepository.findByEmail(email);
 

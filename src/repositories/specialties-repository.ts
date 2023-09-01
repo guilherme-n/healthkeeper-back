@@ -1,5 +1,5 @@
-import { Prisma, Specialty } from "@prisma/client";
+import { Specialty, SpecialtyCreateInput } from "@/types/specialty";
 
 export interface SpecialtiesRepository {
-  create(data: Prisma.SpecialtyUncheckedCreateInput): Promise<Specialty>;
+  create(data: SpecialtyCreateInput): Promise<Specialty>;
 }

@@ -1,11 +1,9 @@
-import { Prisma, Professional } from "@prisma/client";
+import { Professional, ProfessionalCreateInput } from "@/types/professional";
 import { ProfessionalsRepository } from "../professionals-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaProfessionalsRepository implements ProfessionalsRepository {
-  async create(
-    data: Prisma.ProfessionalUncheckedCreateInput,
-  ): Promise<Professional> {
+  async create(data: ProfessionalCreateInput): Promise<Professional> {
     return await prisma.professional.create({ data });
   }
   async search(

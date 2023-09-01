@@ -1,13 +1,10 @@
-import { PrismockClient } from "prismock";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { EmailAlreadyRegisteredError } from "./errors";
 import { compare } from "bcryptjs";
 import { makeCreateUserService } from "./factories";
 import { clearMockDatabase } from "@/repositories/utils";
 
-vi.mock("@prisma/client", () => ({
-  PrismaClient: PrismockClient,
-}));
+vi.mock("@prisma/client");
 
 describe("create user service", () => {
   const sut = makeCreateUserService();

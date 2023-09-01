@@ -1,12 +1,9 @@
-import { PrismockClient } from "prismock";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { makeAuthenticateService, makeCreateUserService } from "./factories";
 import { InvalidCredentialsError } from "./errors";
 import { clearMockDatabase } from "@/repositories/utils";
 
-vi.mock("@prisma/client", () => ({
-  PrismaClient: PrismockClient,
-}));
+vi.mock("@prisma/client");
 
 describe("Authenticate service", () => {
   const sut = makeAuthenticateService();

@@ -11,11 +11,8 @@ export class RegisterService {
     email,
     password,
   }: Prisma.UserCreateInput): Promise<User> {
-    const isEmailAlreadyRegistered = await this.usersRepository.findByIdOrEmail(
-      {
-        email,
-      },
-    );
+    const isEmailAlreadyRegistered =
+      await this.usersRepository.findByEmail(email);
 
     if (isEmailAlreadyRegistered) {
       throw new EmailAlreadyRegisteredError();

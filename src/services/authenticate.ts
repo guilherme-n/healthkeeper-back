@@ -15,7 +15,7 @@ export class AuthenticateService {
     email,
     password,
   }: AuthenticateServiceProps): Promise<User | null> {
-    const user = await this.usersRepository.findByIdOrEmail({ email });
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new InvalidCredentialsError();

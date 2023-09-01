@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { makeAuthenticateService, makeCreateUserService } from "./factories";
+import { makeAuthenticateService, makeRegisterService } from "./factories";
 import { InvalidCredentialsError } from "./errors";
 import { clearMockDatabase } from "@/repositories/utils";
 
@@ -13,7 +13,7 @@ describe("Authenticate service", () => {
   });
 
   it("should be able to authenticate", async () => {
-    const createUserService = makeCreateUserService();
+    const registerService = makeRegisterService();
     const userPassword = "123456";
 
     const user = {
@@ -22,7 +22,7 @@ describe("Authenticate service", () => {
       password: userPassword,
     };
 
-    const createdUser = await createUserService.execute(user);
+    const createdUser = await registerService.execute(user);
 
     const authenticatedUser = await sut.execute({
       email: createdUser.email,
@@ -39,14 +39,14 @@ describe("Authenticate service", () => {
   });
 
   it("should not be able to authenticate when password is incorrect", async () => {
-    const createUserService = makeCreateUserService();
+    const registerService = makeRegisterService();
     const user = {
       name: "John Doe",
       email: "johndoe@email.com",
       password: "123456",
     };
 
-    const createdUser = await createUserService.execute(user);
+    const createdUser = await registerService.execute(user);
 
     expect(
       sut.execute({

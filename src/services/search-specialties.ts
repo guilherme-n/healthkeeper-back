@@ -1,7 +1,14 @@
 import { SpecialtiesRepository } from "@/repositories";
+import { User } from "@/types/user";
+
+interface SearchSpecialtiesServiceRequest {
+  userId: User["id"];
+}
 
 export class SearchSpecialtiesService {
-  constructor(private a: SpecialtiesRepository) {}
+  constructor(private specialtiesRepository: SpecialtiesRepository) {}
 
-  // execute({})
+  async execute({ userId }: SearchSpecialtiesServiceRequest) {
+    return await this.specialtiesRepository.findAll(userId);
+  }
 }

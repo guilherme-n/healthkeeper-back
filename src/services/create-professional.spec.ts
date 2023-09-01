@@ -1,15 +1,10 @@
-import { beforeEach, describe, it, vi, expect } from "vitest";
+import { describe, it, vi, expect } from "vitest";
 import { makeCreateProfessionalService } from "./factories";
-import { clearMockDatabase } from "../repositories/utils";
 
 vi.mock("@prisma/client");
 
 describe("Create professional service", () => {
   const sut = makeCreateProfessionalService();
-
-  beforeEach(() => {
-    clearMockDatabase();
-  });
 
   it("should be able to create a professional", async () => {
     const professional = {

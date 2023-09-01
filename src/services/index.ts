@@ -1,5 +1,13 @@
+import { RegisterService } from "./register";
+import { AuthenticateService } from "./authenticate";
 import { CreateProfessionalService } from "./create-professional";
 import { CreateSpecialtyService } from "./create-specialty";
-import { RegisterService } from "./register";
+import { SearchSpecialtiesService } from "./search-specialties";
 
-export { CreateProfessionalService, CreateSpecialtyService, RegisterService };
+export {
+  RegisterService,
+  AuthenticateService,
+  CreateProfessionalService,
+  CreateSpecialtyService,
+  SearchSpecialtiesService,
+};

@@ -9,14 +9,12 @@ vi.mock("@prisma/client");
 describe("register service", () => {
   const sut = makeRegisterService();
 
-  beforeEach(() => {
-    clearMockDatabase();
-  });
+  beforeEach(() => clearMockDatabase());
 
   it("should be able to register", async () => {
     const user = {
-      email: "johndoe@email.com",
       name: "John Doe",
+      email: "johndoe-new@email.com",
       password: "password",
     };
 
@@ -27,19 +25,12 @@ describe("register service", () => {
 
   it("should throw an error if email is already registered", async () => {
     const user1 = {
-      email: "johndoe1@email.com",
       name: "John Doe",
+      email: "johndoe@email.com",
       password: "password",
     };
 
-    const user2 = {
-      email: "johndoe1@email.com",
-      name: "John Doe 2",
-      password: "password",
-    };
-    await sut.execute(user1);
-
-    expect(sut.execute(user2)).rejects.toThrowError(
+    expect(sut.execute(user1)).rejects.toThrowError(
       EmailAlreadyRegisteredError,
     );
   });
@@ -47,7 +38,7 @@ describe("register service", () => {
   it("should hash user password upon registration", async () => {
     const user = await sut.execute({
       name: "John Doe",
-      email: "johndoe@example.com",
+      email: "johndoe-new@email.com",
       password: "123456",
     });
 

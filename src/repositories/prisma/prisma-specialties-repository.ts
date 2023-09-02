@@ -7,7 +7,21 @@ export class PrismaSpecialtiesRepository implements SpecialtiesRepository {
   create(data: SpecialtyCreateInput): Promise<Specialty> {
     return prisma.specialty.create({ data });
   }
-  findAll(userId: User["id"]): Promise<Specialty[]> {
+
+  async findByDescription({
+    userId,
+    description,
+  }: {
+    userId: User["id"];
+    description: Specialty["description"];
+  }): Promise<Specialty | null> {
+    return await prisma.specialty.findFirst({
+      where: { user_id: userId, description },
+      orderBy: { description: "asc" },
+    });
+  }
+
+  async findAll({ userId }: { userId: User["id"] }): Promise<Specialty[]> {
     return prisma.specialty.findMany({
       where: { user_id: userId },
       orderBy: { description: "asc" },

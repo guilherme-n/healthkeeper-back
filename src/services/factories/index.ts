@@ -3,6 +3,7 @@ import { makeCreateProfessionalService } from "./make-create-professional-servic
 import { makeCreateSpecialtyService } from "./make-create-specialty-service";
 import { makeAuthenticateService } from "./make-authenticate-service";
 import { makeSearchSpecialtiesService } from "./make-search-specialties-service";
+import { makeGetSpecialtyService } from "./make-get-specialty";
 
 export {
   makeRegisterService,
@@ -10,4 +11,5 @@ export {
   makeCreateSpecialtyService,
   makeAuthenticateService,
   makeSearchSpecialtiesService,
+  makeGetSpecialtyService,
 };

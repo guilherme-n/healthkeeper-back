@@ -9,6 +9,6 @@ export class SearchSpecialtiesService {
   constructor(private specialtiesRepository: SpecialtiesRepository) {}
 
   async execute({ userId }: SearchSpecialtiesServiceRequest) {
-    return await this.specialtiesRepository.findAll(userId);
+    return await this.specialtiesRepository.findAll({ userId });
   }
 }

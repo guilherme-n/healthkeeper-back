@@ -1,7 +1,6 @@
 import { clearMockDatabase } from "@/repositories/utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { makeSearchSpecialtiesService } from "./factories";
-import { prisma } from "@/lib/prisma";
 
 vi.mock("@prisma/client");
 

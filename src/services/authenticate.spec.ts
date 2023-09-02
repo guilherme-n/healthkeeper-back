@@ -10,7 +10,7 @@ describe("Authenticate service", () => {
 
   beforeEach(() => clearMockDatabase());
 
-  it.only("should be able to authenticate", async () => {
+  it("should be able to authenticate", async () => {
     const authenticatedUser = await sut.execute({
       email: "johndoe@email.com",
       password: "123456",

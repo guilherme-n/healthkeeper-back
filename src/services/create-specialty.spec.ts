@@ -1,13 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CreateSpecialtyService } from "./";
-import { PrismaSpecialtiesRepository } from "../repositories/prisma";
 import { clearMockDatabase } from "@/repositories/utils";
 import { SpecialtyAlreadyRegisteredError } from "./errors";
+import { makeCreateSpecialtyService } from "./factories";
 
 vi.mock("@prisma/client");
 
 describe("Create specialty", () => {
-  const sut = new CreateSpecialtyService(new PrismaSpecialtiesRepository());
+  const sut = makeCreateSpecialtyService();
 
   beforeEach(() => clearMockDatabase());
 

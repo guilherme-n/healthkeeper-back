@@ -27,4 +27,8 @@ export class PrismaSpecialtiesRepository implements SpecialtiesRepository {
       orderBy: { description: "asc" },
     });
   }
+
+  async delete({ id }: Pick<Specialty, "id">): Promise<void> {
+    await prisma.specialty.delete({ where: { id } });
+  }
 }

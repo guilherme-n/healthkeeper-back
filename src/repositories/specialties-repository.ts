@@ -8,4 +8,5 @@ export interface SpecialtiesRepository {
     description: Specialty["description"];
   }): Promise<Specialty | null>;
   findAll(data: { userId: User["id"] }): Promise<Specialty[]>;
+  delete({ id }: Pick<Specialty, "id">): Promise<void>;
 }

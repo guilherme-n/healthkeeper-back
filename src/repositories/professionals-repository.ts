@@ -1,9 +1,10 @@
 import { Professional, ProfessionalCreateInput } from "@/types/professional";
+import { Optional } from "@prisma/client/runtime/library";
 
 export interface ProfessionalsRepository {
   create(data: ProfessionalCreateInput): Promise<Professional>;
 
-  search(
-    data: Pick<Professional, "user_id" | "specialty_id">,
+  findAll(
+    data: Partial<Pick<Professional, "user_id" | "specialty_id">>,
   ): Promise<Professional[]>;
 }

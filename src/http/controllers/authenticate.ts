@@ -30,7 +30,7 @@ export async function authenticate(req: FastifyRequest, res: FastifyReply) {
         domain: "localhost",
         path: "/",
         httpOnly: true,
-        maxAge: 60 * 60 * 24,
+        maxAge: 24 * 60 * 60,
       })
       .send();
   } catch (err) {

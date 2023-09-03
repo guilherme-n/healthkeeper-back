@@ -14,7 +14,7 @@ export class AuthenticateService {
   async execute({
     email,
     password,
-  }: AuthenticateServiceRequest): Promise<User | null> {
+  }: AuthenticateServiceRequest): Promise<User> {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {

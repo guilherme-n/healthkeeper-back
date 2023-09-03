@@ -5,12 +5,18 @@ import {
 } from "@/services/factories";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
+import { verifyJWT } from "../middlewares/verify-jwt";
+import { JwtToken } from "@/types/jtw-token";
 
 export async function specialtiesRoutes(app: FastifyInstance) {
+  app.addHook("onRequest", verifyJWT);
+
   app.get("/", async (req: FastifyRequest, res: FastifyReply) => {
+    const token = (await req.jwtDecode()) as JwtToken;
+
     const searchSpecialtyService = makeSearchSpecialtiesService();
     const specialties = await searchSpecialtyService.execute({
-      userId: "66c2fa58-51c5-41f5-b971-de7bd0c1c782",
+      userId: token.sub,
     });
 
     return res.send(
@@ -22,6 +28,7 @@ export async function specialtiesRoutes(app: FastifyInstance) {
   });
 
   app.post("/", async (req: FastifyRequest, res: FastifyReply) => {
+    const token = (await req.jwtDecode()) as JwtToken;
     const requestBodySchema = z.object({
       description: z.string(),
     });
@@ -34,7 +41,7 @@ export async function specialtiesRoutes(app: FastifyInstance) {
     try {
       createdSpecialty = await createSpecialtyService.execute({
         ...specialty,
-        user_id: "66c2fa58-51c5-41f5-b971-de7bd0c1c782",
+        user_id: token.sub,
       });
     } catch (err) {
       if (err instanceof SpecialtyAlreadyRegisteredError) {

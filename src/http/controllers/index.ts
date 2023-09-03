@@ -1,6 +1,4 @@
-import { register } from "./register";
-import { authenticate } from "./authenticate";
-import { signOut } from "./sign-out";
-import { specialtiesRoutes } from "./specialties";
-
-export { register, authenticate, signOut, specialtiesRoutes };
+export { register } from "./register";
+export { authenticate } from "./authenticate";
+export { signOut } from "./sign-out";
+export { specialtiesRoutes } from "./specialties";

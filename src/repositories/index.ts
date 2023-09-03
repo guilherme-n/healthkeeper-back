@@ -1,5 +1,3 @@
-import { ProfessionalsRepository } from "./professionals-repository";
-import { SpecialtiesRepository } from "./specialties-repository";
-import { UsersRepository } from "./users-repository";
-
-export { ProfessionalsRepository, SpecialtiesRepository, UsersRepository };
+export { ProfessionalsRepository } from "./professionals-repository";
+export { SpecialtiesRepository } from "./specialties-repository";
+export { UsersRepository } from "./users-repository";

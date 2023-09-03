@@ -1,15 +1,6 @@
-import { RegisterService } from "./register";
-import { AuthenticateService } from "./authenticate";
-import { CreateProfessionalService } from "./create-professional";
-import { CreateSpecialtyService } from "./create-specialty";
-import { SearchSpecialtiesService } from "./search-specialties";
-import { SearchProfessionalsService } from "./search-professionals";
-
-export {
-  RegisterService,
-  AuthenticateService,
-  CreateProfessionalService,
-  CreateSpecialtyService,
-  SearchSpecialtiesService,
-  SearchProfessionalsService,
-};
+export { RegisterService } from "./register";
+export { AuthenticateService } from "./authenticate";
+export { CreateProfessionalService } from "./create-professional";
+export { CreateSpecialtyService } from "./create-specialty";
+export { SearchSpecialtiesService } from "./search-specialties";
+export { SearchProfessionalsService } from "./search-professionals";
